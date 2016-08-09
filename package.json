@@ -1,0 +1,20 @@
+{
+  "name": "calendar-app",
+  "version": "0.0.1",
+  "description": "App that allows me girlfriend to save her working shifts, so they get synced with Google Calendar",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomMatheussen/calendar-app.git"
+  },
+  "author": "Tom Matheussen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TomMatheussen/calendar-app/issues"
+  },
+  "homepage": "https://github.com/TomMatheussen/calendar-app#readme"
+}
