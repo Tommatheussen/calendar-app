@@ -3,9 +3,14 @@
   "version": "0.0.1",
   "description": "App that allows me girlfriend to save her working shifts, so they get synced with Google Calendar",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "http-server": "^0.9.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server ./app -a localhost -p 8000 -c-1"
   },
   "repository": {
     "type": "git",

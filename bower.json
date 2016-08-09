@@ -1,0 +1,21 @@
+{
+  "name": "calendar-app",
+  "description": "App that allows me girlfriend to save her working shifts, so they get synced with Google Calendar",
+  "authors": [
+    "Tom Matheussen"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Tommatheussen/calendar-app",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8"
+  }
+}
