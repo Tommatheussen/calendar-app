@@ -1,7 +1,7 @@
-var gulp = require('gulp'),
-    del = require('del');
-
+var gulp = require('gulp');
+    
 gulp.task('clean', function (cb) {
+    var del = require('del');
     del([
         'dist'
     ], cb);
@@ -28,7 +28,41 @@ gulp.task('build-template-cache', function () {
 });
 
 gulp.task('build-js', function () {
-    var b = browserify({
-        entries;
-    })
+    var mainBowerFiles = require('main-bower-files');
+    var minify = require('gulp-minify');
+    var concat = require('gulp-concat');
+
+    return gulp.src(mainBowerFiles({
+        filter: '**/*.js'
+    }))
+        .pipe(minify({
+            noSource: true,
+            ext: {
+                min: '.min.js'
+            }
+        }))
+        .pipe(concat('vendor.min.js'))
+        .pipe(gulp.dest('./dist'));
 });
+
+gulp.task('build-css', function () {
+    var mainBowerFiles = require('main-bower-files');
+    var minifyCSS = require('gulp-clean-css');
+    var concat = require('gulp-concat');
+
+    return gulp.src(mainBowerFiles({
+        filter: '**/*.css'
+    }))
+        .pipe(minifyCSS({
+           // noSource: true,
+            /*ext: {
+                min: '.min.css'
+            }*/
+        }))
+        .pipe(concat('vendor.min.css'))
+        .pipe(gulp.dest('./dist'));
+});
+
+
+
+gulp.task('build', ['clean', 'build-js']);
