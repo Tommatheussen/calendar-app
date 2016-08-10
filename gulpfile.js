@@ -5,13 +5,13 @@ var uglifyCSS = require('gulp-uglifycss');
 var inject = require('gulp-inject');
 var templateCache = require('gulp-angular-templatecache');
 var uglify = require('gulp-uglify');
-var rev = require('gulp-rev');
-var revReplace = require('gulp-rev-replace');
-var revDelete = require('gulp-rev-delete-original');
 var ngAnnotate = require('gulp-ng-annotate');
 var angularFilesort = require('gulp-angular-filesort');
 var del = require('del');
 var git = require('gulp-git');
+var runSequence = require('gulp-run-sequence');
+var injectVersion = require('gulp-inject-version');
+var bump = require('gulp-bump');
 
 gulp.task('clean', function () {
     return del.sync([
@@ -88,25 +88,56 @@ gulp.task('inject', ['build-js', 'build-css'], function () {
 
 gulp.task('build', ['clean', 'inject']);
 
-gulp.task('publish', ['build'], function () {
+gulp.task('setup', function (done) {
 	process.chdir('./dist');
-	git.init(function (err) {
+	return git.init(function (err) {
 		if (err) throw err;
-		git.checkout('gh-pages', { args: '--orphan', function (err) {
+		return git.checkout('gh-pages', { args: '--orphan' }, function (err) {
 			if (err) throw err;
-			git.addRemote('origin', 'https://github.com/Tommatheussen/calendar-app.git', function (err) {
+			return git.addRemote('origin', 'https://github.com/Tommatheussen/calendar-app.git', function (err) {
 				if (err) throw err;
-				git.fetch('origin', 'gh-pages', function (err) {
-					git.exec({ args: 'branch --track gh-pages origin/gh-pages' }, function (err, stdout) {
+				return git.fetch('origin', 'gh-pages', function (err) {
+					if (err) throw err;
+					return git.exec({ args: 'branch --track gh-pages origin/gh-pages' }, function (err, stdout) {
 						if (err) throw err;
-						console.log(stdout);
-						git.status(function (err, stdout) {
-							if (err) throw err;
-							console.log(stdout);
-						});
+						done();
 					});
 				});
 			});
 		});
 	});
+});
+
+gulp.task('commit', function () {
+	return gulp.src('./*')
+		.pipe(git.add())
+		.pipe(git.commit('New version'));
+});
+
+gulp.task('push', function (done) {
+	return git.push('origin', 'gh-pages', function (err) {
+		if (err) throw err;
+		process.chdir('..');
+		done();
+	});
+});
+
+gulp.task('bump', function (done) {
+	runSequence('bump-v', 'inject-v', done);
+});
+
+gulp.task('bump-v', function () {
+	return gulp.src('./package.json')
+		.pipe(bump())
+		.pipe(gulp.dest('./'));
+});
+
+gulp.task('inject-v', function (done) {
+	return gulp.src('./dist/index.html')
+		.pipe(injectVersion())
+		.pipe(gulp.dest('./dist'));
+});
+
+gulp.task('publish', ['build'], function (done) {
+	runSequence('bump', 'setup', 'commit', 'push', done);
 });
