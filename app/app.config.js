@@ -5,14 +5,14 @@ angular.module('calendarApp')
         var homeState = {
             name: 'home',
             url: '/',
-            onEnter: function (GAuth, $state) {
+            onEnter: ['GAuth', '$state', function (GAuth, $state) {
                 GAuth.checkAuth().then(function (user) {
                     console.log(user);
                     $state.go('calendar');
                 }, function (error) {
                     $state.go('login');
                 });
-            }
+            }]
         }
 
         $stateProvider.state(homeState);
