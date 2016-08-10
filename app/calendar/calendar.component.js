@@ -8,8 +8,18 @@ angular.
         controllerAs: 'vm'
     });
 
-function calendarController($mdMedia, $scope) {
+function calendarController($mdMedia, $scope, GApi) {
     var vm = this;
+
+    vm.$onInit = onInit;
+
+    function onInit() {
+        GApi.executeAuth('calendar', 'calendar.acl.get').then(function (resp) {
+            console.log(resp);
+        }, function (error) {
+            console.log(error);
+        });
+    }
 
     vm.days = getDaysInMonth(new Date().getMonth() - 1, new Date().getFullYear());
 
