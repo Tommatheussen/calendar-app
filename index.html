@@ -14,15 +14,16 @@
     </head>
 
     <body ng-app="calendarApp" layout="column" flex>
-		<md-content flex layout-fill>
-        	<calendar layout="row" layout-fill flex></calendar>
-		</md-content>
+        <top-toolbar></top-toolbar>
+        <md-content flex layout-fill>
+            <ui-view layout="row" layout-fill flex layout-align="center"></ui-view>
+        </md-content>
 
 		<md-toolbar flex="none">
 			<span flex></span>
 			<h2 class="md-toolbar-tools">
 				<span class="md-flex">
-					Version: v0.0.2
+					Version: v0.0.3
 				</span>
 			</h2>
 		</md-toolbar>
