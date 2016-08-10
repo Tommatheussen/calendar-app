@@ -1,15 +1,17 @@
 <div layout="column" flex>
-    <md-grid-list md-cols="7" md-row-height="fit" flex>
-        <md-grid-tile ng-repeat="day in vm.days">
-            <md-grid-tile-header>
-                <h3>{{ day.date | date: dd-MM-YYYY }}</h3>
-            </md-grid-tile-header>
-            <div layout="row" flex layout-wrap ng-if="!day.offset">
-                <div flex="25" ng-repeat="shift in vm.shifts">
-                    <md-button ng-click="vm.setShift(day, shift)" class="md-raised md-primary shift-button" ng-class="{ 'active': day.shift === shift }">
-                        {{ shift }}
-                    </md-button>
-                </div>
+    <md-grid-list md-cols="1" md-cols-gt-xs="7" md-row-height="fit" flex>
+        <md-grid-tile ng-repeat="day in vm.days" class="calendar-grid" flex>
+			<div layout="column" layout-fill flex>
+				<md-grid-tile-header>
+					<h3 class="calendar-header">{{ day.date | date: dd-MM-YYYY }}</h3>
+				</md-grid-tile-header>
+				<div layout="row" layout-wrap ng-if="!day.offset" class="calendar-content">
+					<div flex="20" flex-gt-xs="50" flex-gt-md="25" ng-repeat="shift in vm.shifts">
+						<md-button ng-click="vm.setShift(day, shift)" class="md-raised md-primary shift-button" ng-class="{ 'active': day.shift === shift }">
+							{{ shift }}
+						</md-button>
+					</div>
+				</div>
             </div>
         </md-grid-tile>
     </md-grid-list>

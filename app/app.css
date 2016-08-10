@@ -11,3 +11,16 @@
 .shift-button.active {
     background-color: red !important;
 }
+
+.calendar-content {
+	margin-top: 48px;
+}
+
+.calendar-grid {
+	height: 100%;
+}
+
+.calendar-header {
+	font-size:18px;
+	color: black;
+}
