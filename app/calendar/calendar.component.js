@@ -33,12 +33,12 @@ function calendarController() {
     }
 
     function getDaysInMonth(month, year) {
-        let date = new Date(year, month, 1);
-        let days = [];
-    
-        let offsetDays = (date.getDay() || 7) - 1;
+        var date = new Date(year, month, 1);
+        var days = [];
 
-        // Add offset days to the days array, this ensures the 1st day of the month is placed at the correct position in the calendar view    
+        var offsetDays = (date.getDay() || 7) - 1;
+
+        // Add offset days to the days array, this ensures the 1st day of the month is placed at the correct position in the calendar view
         for (var i = 0; i < offsetDays; i++) {
             days.push({
                 offset: true
