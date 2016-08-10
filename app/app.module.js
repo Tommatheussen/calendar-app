@@ -2,5 +2,6 @@
 
 angular.module('calendarApp', [
     'ngMaterial',
-    'calendar'
+    'calendar',
+	'angular-google-gapi'
 ]);
