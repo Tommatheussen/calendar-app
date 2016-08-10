@@ -8,10 +8,19 @@ angular.
         controllerAs: 'vm'
     });
 
-function calendarController() {
+function calendarController($mdMedia, $scope) {
     var vm = this;
 
     vm.days = getDaysInMonth(new Date().getMonth() - 1, new Date().getFullYear());
+
+	vm.smallScreen = $mdMedia('xs');
+
+	$scope.$watch(function () {
+		return $mdMedia('xs');
+	}, function (small) {
+		vm.smallScreen = small;
+	});
+
 
     vm.shifts = [
         'v\'',
