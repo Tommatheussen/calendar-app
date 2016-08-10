@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Calendar App</title>
+
+		<!-- vendor:css -->
+        <link rel="stylesheet" href="vendor.min.css">
+        <!-- endinject -->
+
+		<!-- inject:css -->
+        <link rel="stylesheet" href="app.min.css">
+        <!-- endinject -->
+    </head>
+
+    <body ng-app="calendarApp" layout="column" flex>
+        <calendar layout="row" flex></calendar>
+		<footer>
+			<p>Version: v0.0.1</p>
+		</footer>
+
+		<!-- vendor:js -->
+        <script src="vendor.min.js"></script>
+        <!-- endinject -->
+
+		<!-- inject:js -->
+        <script src="app.min.js"></script>
+        <script src="app.templates.js"></script>
+        <!-- endinject -->
+    </body>
+</html>
