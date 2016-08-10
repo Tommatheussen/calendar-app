@@ -8,12 +8,30 @@ angular.
         controllerAs: 'vm'
     });
 
-function loginController(GAuth) {
+function loginController(GAuth, GData, $state) {
     var vm = this;
 
-    vm.doLogin = function () {
-        GAuth.login().then(function () {
-            console.log('logged in');
+    vm.$onInit = onInit;    
+    vm.doLogin = doLogin;
+
+    function onInit() {
+        GData.isLogin() ? isLoggedIn() : null;
+    }
+
+    function isLoggedIn() {
+        // $cookies.put
+        //TODO: Set cookies
+        console.log('user is: ', GData.getUser());
+        $state.go('home');
+    }
+
+    function doLogin() {
+        GAuth.checkAuth().then(function () {
+            isLoggedIn();
+        }, function () {
+            GAuth.login().then(function () {
+                isLoggedIn();
+            });
         });
     }
 }

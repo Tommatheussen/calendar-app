@@ -7,6 +7,7 @@ angular.module('calendarApp')
             url: '/',
             onEnter: function (GAuth, $state) {
                 GAuth.checkAuth().then(function (user) {
+                    console.log(user);
                     $state.go('calendar');
                 }, function (error) {
                     $state.go('login');

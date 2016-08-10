@@ -7,17 +7,4 @@ angular.module('calendarApp')
 		GApi.load('calendar', 'v3');
 		GAuth.setClient(CLIENT);
 		GAuth.setScope('https://www.googleapis.com/auth/calendar');
-
-		GAuth.load();
-
-		/*GAuth.login().then(function (user) {
-			console.log(user);
-		}, function (error) {
-			console.log(error);
-		});*/
-		/*GAuth.checkAuth().then(function (user) {
-			console.log(user);
-		}, function (err) {
-			console.log(err);
-		});*/
 	});

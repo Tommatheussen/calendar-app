@@ -5,7 +5,7 @@ angular.module('calendar')
         var calendarState = {
             name: 'calendar',
             url: '/calendar',
-            template: '<h3>Calendar</h3>'
+            component: 'calendar'
         };
 
         $stateProvider.state(calendarState);
