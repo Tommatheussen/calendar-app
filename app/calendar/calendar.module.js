@@ -1,3 +1,6 @@
 'use strict';
 
-angular.module('calendar', ['ngMaterial']);
+angular.module('calendar', [
+    'ngMaterial',
+    'ui.router'
+]);

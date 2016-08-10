@@ -3,7 +3,7 @@
 angular.
     module('calendar').
     component('calendar', {
-        templateUrl: 'calendar/calendar.template.html',
+        templateUrl: 'calendar/calendar.tmpl.html',
         controller: calendarController,
         controllerAs: 'vm'
     });

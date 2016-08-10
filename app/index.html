@@ -14,9 +14,9 @@
     </head>
 
     <body ng-app="calendarApp" layout="column" flex>
-		<md-content flex layout-fill>
-        	<calendar layout="row" layout-fill flex></calendar>
-		</md-content>
+        <md-content flex layout-fill>
+            <ui-view layout="row" layout-fill flex layout-align="center"></ui-view>
+        </md-content>
 
 		<md-toolbar flex="none">
 			<span flex></span>
@@ -32,13 +32,19 @@
         <script src="bower_components/angular-aria/angular-aria.min.js"></script>
         <script src="bower_components/angular-material/angular-material.min.js"></script>
 		<script src="bower_components/angular-google-gapi/dist/angular-google-gapi.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <!-- endinject -->
 
 		<!-- inject:js -->
         <script src="app.module.js"></script>
 		<script src="app.run.js"></script>
+        <script src="app.config.js"></script>
         <script src="calendar/calendar.module.js"></script>
+        <script src="calendar/calendar.config.js"></script>
         <script src="calendar/calendar.component.js"></script>
+        <script src="login/login.module.js"></script>
+        <script src="login/login.config.js"></script>
+        <script src="login/login.component.js"></script>
 		<!-- endinject -->
     </body>
 </html>
