@@ -51,7 +51,6 @@ function calendarController() {
             });
             date.setDate(date.getDate() + 1);
         }
-        console.log(days);
         return days;
     }
 }
