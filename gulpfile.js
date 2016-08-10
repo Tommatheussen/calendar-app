@@ -109,9 +109,11 @@ gulp.task('setup', function (done) {
 });
 
 gulp.task('commit', function () {
+	var pjson = require(__dirname + '/package.json');
+
 	return gulp.src('./*')
 		.pipe(git.add())
-		.pipe(git.commit('New version'));
+		.pipe(git.commit('New version ' + pjson.version));
 });
 
 gulp.task('push', function (done) {
