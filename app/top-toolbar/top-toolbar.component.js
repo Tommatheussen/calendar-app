@@ -10,14 +10,14 @@ angular.
 
 function topToolbarController(GAuth, GData, $state) {
     var vm = this;
- 
-    vm.doLogout = doLogout;
-    vm.getUser = GData.getUser;
 
-    function doLogout() {
-        GAuth.logout().then(function () {
-            //TODO: Remove cookies
-            $state.go('login');
-        });
-    }
+    vm.getUser = GData.getUser;
+	vm.goToLogin = goToLogin;
+	vm.isLoggedIn = GData.isLogin;
+
+	function goToLogin() {
+		if (!$state.is('login')) {
+			$state.go('login');
+		}
+	}
 }
