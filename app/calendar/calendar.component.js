@@ -5,10 +5,13 @@ angular.
     component('calendar', {
         templateUrl: 'calendar/calendar.tmpl.html',
         controller: calendarController,
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+		bindings: {
+			flex: '='
+		}
     });
 
-function calendarController($mdMedia, $scope, GApi) {
+function calendarController($mdMedia, $scope, GApi, calendarService) {
     var vm = this;
 
     vm.$onInit = onInit;
@@ -18,7 +21,11 @@ function calendarController($mdMedia, $scope, GApi) {
             console.log(resp);
         }, function (error) {
             console.log(error);
-        });
+			});
+
+		calendarService.getShifts().then(function (shifts) {
+			vm.shifts = shifts;
+		});
     }
 
     vm.days = getDaysInMonth(new Date().getMonth() - 1, new Date().getFullYear());
@@ -30,21 +37,6 @@ function calendarController($mdMedia, $scope, GApi) {
 	}, function (small) {
 		vm.smallScreen = small;
 	});
-
-
-    vm.shifts = [
-        'v\'',
-        'kv',
-        'h1',
-        'Gv',
-        'klv',
-        'l\'',
-        'gl',
-        'hmlw',
-        'vw',
-        'ld',
-        'dw',
-    ];
 
     vm.setShift = function (day, shift) {
         console.log(day, shift);

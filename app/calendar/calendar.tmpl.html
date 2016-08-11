@@ -8,7 +8,10 @@
 				<div layout="row" layout-wrap ng-if="!day.offset" class="calendar-content">
 					<div flex="20" flex-gt-xs="50" flex-gt-md="25" ng-repeat="shift in vm.shifts">
 						<md-button ng-click="vm.setShift(day, shift)" class="md-raised md-primary shift-button" ng-class="{ 'active': day.shift === shift }">
-							{{ shift }}
+							<md-tooltip>
+								{{ shift.start }} - {{ shift.end }}
+							</md-tooltip>
+							{{ shift.title }}
 						</md-button>
 					</div>
 				</div>

@@ -1,6 +1,6 @@
 {
   "name": "calendar-app",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "App that allows me girlfriend to save her working shifts, so they get synced with Google Calendar",
   "dependencies": {},
   "devDependencies": {
@@ -15,6 +15,7 @@
     "gulp-git": "^1.11.0",
     "gulp-inject": "^4.1.0",
     "gulp-inject-version": "^1.0.1",
+    "gulp-jsonminify": "^1.0.0",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-run-sequence": "^0.3.2",
     "gulp-uglify": "^2.0.0",
