@@ -17,8 +17,8 @@ function calendarController($mdMedia, $scope, GApi, calendarService) {
     vm.$onInit = onInit;
 
     function onInit() {
-        GApi.executeAuth('calendar', 'calendar.acl.get').then(function (resp) {
-            console.log(resp);
+        GApi.executeAuth('calendar', 'calendarList.list').then(function (resp) {
+            vm.calendars = resp.items;
         }, function (error) {
             console.log(error);
 			});
