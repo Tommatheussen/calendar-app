@@ -12,6 +12,7 @@ var git = require('gulp-git');
 var runSequence = require('gulp-run-sequence');
 var injectVersion = require('gulp-inject-version');
 var bump = require('gulp-bump');
+var jsonminify = require('gulp-jsonminify');
 
 gulp.task('clean', function () {
     return del.sync([
@@ -79,7 +80,14 @@ gulp.task('build-app-css', function () {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('inject', ['build-js', 'build-css'], function () {
+
+gulp.task('build-json', function () {
+	return gulp.src('./app/**/*.json')
+		.pipe(jsonminify())
+		.pipe(gulp.dest('./dist'));
+});
+
+gulp.task('inject', ['build-js', 'build-css', 'build-json'], function () {
 	return gulp.src('./app/index.html')
 		.pipe(inject(gulp.src('./dist/vendor.min.**', { read: false }), { name: 'vendor', ignorePath: 'dist', addRootSlash: false }))
 		.pipe(inject(gulp.src('./dist/app.**', { read: false }), { ignorePath: 'dist', addRootSlash: false }))
