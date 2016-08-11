@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('calendar')
-	.config(function ($stateProvider) {        
+	.config(function ($stateProvider) {
         var calendarState = {
             name: 'calendar',
             url: '/calendar',
