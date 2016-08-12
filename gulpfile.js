@@ -82,7 +82,10 @@ gulp.task('build-app-css', function () {
 
 
 gulp.task('build-json', function () {
-	return gulp.src('./app/**/*.json')
+	return gulp.src([
+		'./app/**/*.json',
+		'!./app/bower_components/**'
+	])
 		.pipe(jsonminify())
 		.pipe(gulp.dest('./dist'));
 });
