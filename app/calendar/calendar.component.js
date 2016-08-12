@@ -15,6 +15,7 @@ function calendarController($mdMedia, $scope, GApi, calendarService) {
     var vm = this;
 
     vm.$onInit = onInit;
+	vm.saveShifts = saveShifts;
 
     function onInit() {
         GApi.executeAuth('calendar', 'calendarList.list').then(function (resp) {
@@ -27,6 +28,22 @@ function calendarController($mdMedia, $scope, GApi, calendarService) {
 			vm.shifts = shifts;
 		});
     }
+
+	function saveShifts() {
+		GApi.executeAuth('calendar', 'events.insert', {
+			calendarId: "hj3i0ucmkenfjmdbrr85v7o2q8@group.calendar.google.com",
+			start: {
+				"dateTime": new Date()
+			},
+			end: {
+				"dateTime": new Date(new Date().setHours("15"))
+			}
+		}).then(function (resp) {
+			console.log(resp);
+		}, function (error) {
+			console.log(error);
+		});
+	}
 
     vm.days = getDaysInMonth(new Date().getMonth() - 1, new Date().getFullYear());
 
