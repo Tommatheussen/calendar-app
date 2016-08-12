@@ -3,7 +3,8 @@
 angular.module('calendar')
 	.factory('calendarService', function ($http) {
         return {
-            getShifts: getShifts
+            getShifts: getShifts,
+			getCalendar: getCalendar
         };
 
 		function getShifts() {
@@ -15,6 +16,10 @@ angular.module('calendar')
 				console.log(response);
 				return response.data;
 			}
+		}
+
+		function getCalendar() {
+
 		}
 
 		function errorHandling(error) {

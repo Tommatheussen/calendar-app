@@ -43,7 +43,6 @@
     "title": "vw",
     "start": "7:00",
     "end": "14:00"
-	//TODO: Support weekend/week only shifts
   },
   {
     "title": "ld",
