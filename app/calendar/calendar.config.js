@@ -4,7 +4,7 @@ angular.module('calendar')
 	.config(function ($stateProvider) {
         var calendarState = {
             name: 'calendar',
-            url: '/calendar',
+            url: '/',
             component: 'calendar'
         };
 
