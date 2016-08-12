@@ -5,13 +5,16 @@ angular.
     component('login', {
         templateUrl: 'login/login.tmpl.html',
         controller: loginController,
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+		bindings: {
+			flex: '='
+		}
     });
 
 function loginController(GAuth, GData, $state) {
     var vm = this;
 
-    vm.$onInit = onInit;    
+    vm.$onInit = onInit;
     vm.doLogin = doLogin;
 
     function onInit() {
