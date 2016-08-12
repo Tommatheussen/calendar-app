@@ -1,22 +1,22 @@
 <div layout="column" flex>
-	<md-list>
+	<!--<md-list>
 		<md-list-item ng-repeat="calendar in vm.calendars">
 			{{ calendar.summary }}
 		</md-list-item>
-	</md-list>
+	</md-list>-->
     <md-grid-list md-cols="1" md-cols-gt-xs="7" md-row-height="3:2" md-row-height-gt-xs="3:10" md-row-height-gt-sm="4:8" md-row-height-gt-md="4:4" flex>
         <md-grid-tile ng-repeat="day in vm.days | filter : (vm.smallScreen ? { offset: '!true' } : '')" class="calendar-grid">
 			<div layout="column" flex layout-fill>
 				<md-grid-tile-header>
-					<h3 class="calendar-header">{{ day.date | date: dd-MM-YYYY }}</h3>
+					<h3 class="calendar-header">{{ ::day.date | date: dd-MM-YYYY }}</h3>
 				</md-grid-tile-header>
 				<div layout="row" layout-wrap ng-if="!day.offset" class="calendar-content">
-					<div flex="20" flex-gt-xs="50" flex-gt-md="25" ng-repeat="shift in vm.shifts">
+					<div flex="20" flex-gt-xs="50" flex-gt-md="25" ng-repeat="(shift, times) in vm.shifts">
 						<md-button ng-click="vm.setShift(day, shift)" class="md-raised md-primary shift-button" ng-class="{ 'active': day.shift === shift }">
 							<md-tooltip>
-								{{ shift.start }} - {{ shift.end }}
+                                {{ ::times | duration }}
 							</md-tooltip>
-							{{ shift.title }}
+							{{ ::shift }}
 						</md-button>
 					</div>
 				</div>
