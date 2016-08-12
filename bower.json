@@ -19,6 +19,7 @@
     "angular-animate": "^1.5.8",
     "angular-material": "^1.0.9",
     "angular-google-gapi": "^1.0.0",
-    "angular-ui-router": "1.0.0-beta.1"
+    "angular-ui-router": "1.0.0-beta.1",
+    "angulartics-google-analytics": "^0.2.1"
   }
 }

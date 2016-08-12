@@ -6,5 +6,7 @@ angular.module('calendarApp', [
     'login',
     'topToolbar',
     'ui.router',
-	'angular-google-gapi'
+	'angular-google-gapi',
+	'angulartics',
+	'angulartics.google.analytics'
 ]);
