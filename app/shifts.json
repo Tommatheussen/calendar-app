@@ -69,7 +69,7 @@
             "minute": "30"
         }
     },
-    "hmlv": {
+    "hmlw": {
         "start": {
             "hour": "14",
             "minute": "30"
@@ -77,6 +77,9 @@
         "end": {
             "hour": "21",
             "minute": "00"
+        },
+        "weekend": {
+            "end": "+1"
         }
     },
     "vw": {
@@ -87,7 +90,8 @@
         "end": {
             "hour": "14",
             "minute": "00"
-        }
+        },
+        "weekend": true
     },
     "ld": {
         "start": {

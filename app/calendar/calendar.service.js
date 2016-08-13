@@ -13,7 +13,6 @@ angular.module('calendar')
 				.catch(errorHandling);
 
 			function getShiftsComplete(response) {
-				console.log(response);
 				return response.data;
 			}
 		}

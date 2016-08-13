@@ -11,7 +11,7 @@ angular.
 		}
     });
 
-function calendarController($mdMedia, $scope, GApi, calendarService) {
+function calendarController($mdMedia, $scope, GApi, calendarService, $window, calendarId) {
     var vm = this;
 
     vm.$onInit = onInit;
@@ -20,7 +20,9 @@ function calendarController($mdMedia, $scope, GApi, calendarService) {
     function onInit() {
         var today = new Date();
         vm.offsetDays = getOffsetDays(today.getMonth() - 1, today.getUTCFullYear());
-        vm.days = getDaysInMonth(today.getMonth() -1, today.getUTCFullYear());
+        vm.days = getDaysInMonth(today.getMonth() - 1, today.getUTCFullYear());
+        
+        //TODO: Load event from current month
 
         /*GApi.executeAuth('calendar', 'calendarList.list').then(function (resp) {
             vm.calendars = resp.items;
@@ -34,37 +36,61 @@ function calendarController($mdMedia, $scope, GApi, calendarService) {
     }
 
     vm.getRange = function (num) {
-        console.log(num);
         return new Array(num);
     }
 
-    function saveShifts() {
-        console.log(vm.days);
+    function createTime(date, time) {
+        var dateObject = new Date(date);
+        dateObject.setHours(time.hour);
+        dateObject.setMinutes(time.minute);
 
-        
-        
-        
-		/*GApi.executeAuth('calendar', 'events.insert', [{
-			calendarId: "hj3i0ucmkenfjmdbrr85v7o2q8@group.calendar.google.com",
-			start: {
-				"dateTime": new Date()
-			},
-			end: {
-				"dateTime": new Date(new Date().setHours("17"))
+        return { "dateTime": dateObject };
+    }
+
+    var actions = {
+        'insert': 'events.insert',
+        'delete': 'events.',
+        'update': 'events.'
+    }
+
+    function createRequest(element) {
+        var action;
+        var params = {
+            calendarId: calendarId,
+            start: createTime(element.date, vm.shifts[element.shift].start),
+            end: createTime(element.date, vm.shifts[element.shift].end),
+            summary: element.shift
+        }
+
+        //TODO: Patch and delete functions, load data from google first
+
+        if (element.shift) {
+            action = 'insert';            
+        }
+
+        var req = action ? GApi.createRequest('calendar', actions[action], params) : undefined;
+
+        return req; 
+    }
+
+    function saveShifts() {
+        var batch = $window.gapi.client.newBatch();
+
+        vm.days.forEach(function (element) {
+            var possibleRequest = createRequest(element);
+
+            if (possibleRequest) {
+                batch.add(possibleRequest);
             }
-        }, {
-            calendarId: "hj3i0ucmkenfjmdbrr85v7o2q8@group.calendar.google.com",
-			start: {
-				"dateTime": new Date(new Date().setHours("21"))
-			},
-			end: {
-				"dateTime": new Date(new Date().setHours("22"))
-            }    
-        }]).then(function (resp) {
-			console.log(resp);
-		}, function (error) {
-			console.log(error);
-		});*/
+        }, this);
+
+        console.log(batch);
+        
+        batch.then(function (ok) {
+            console.log(ok);
+        }, function (error) {
+            console.log(error);
+        }, this);
 	}
 
 	vm.smallScreen = $mdMedia('xs');
