@@ -24,12 +24,16 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
         
         //TODO: Load event from current month
 
-        /*GApi.executeAuth('calendar', 'calendarList.list').then(function (resp) {
+        GApi.executeAuth('calendar', 'events.list', {
+            calendarId: calendarId,
+            //timeMin: new Date(new Date().setDate(1))
+        }).then(function (resp) {
+            console.log(resp);
             vm.calendars = resp.items;
         }, function (error) {
             console.log(error);
 			});
-*/
+
 		calendarService.getShifts().then(function (shifts) {
 			vm.shifts = shifts;
 		});
@@ -49,23 +53,23 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
 
     var actions = {
         'insert': 'events.insert',
-        'delete': 'events.',
-        'update': 'events.'
+        'delete': 'events.delete',
+        'update': 'events.patch'
     }
 
     function createRequest(element) {
         var action;
         var params = {
             calendarId: calendarId,
-            start: createTime(element.date, vm.shifts[element.shift].start),
-            end: createTime(element.date, vm.shifts[element.shift].end),
-            summary: element.shift
         }
 
         //TODO: Patch and delete functions, load data from google first
 
         if (element.shift) {
-            action = 'insert';            
+            action = 'insert'; 
+            params.start = createTime(element.date, vm.shifts[element.shift].start);
+            params.end = createTime(element.date, vm.shifts[element.shift].end);
+            params.summary = element.shift;
         }
 
         var req = action ? GApi.createRequest('calendar', actions[action], params) : undefined;
