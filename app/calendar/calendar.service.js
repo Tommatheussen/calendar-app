@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
-angular.module('calendar')
-	.factory('calendarService', function ($http) {
+angular.module("calendar")
+	.factory("calendarService", function ($http) {
         return {
             getShifts: getShifts,
 			getCalendar: getCalendar
         };
 
 		function getShifts() {
-			return $http.get('shifts.json')
+			return $http.get("shifts.json")
 				.then(getShiftsComplete)
 				.catch(errorHandling);
 

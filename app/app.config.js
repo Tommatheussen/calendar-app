@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-angular.module('calendarApp')
+angular.module("calendarApp")
     .config(function ($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise("/");
 	});

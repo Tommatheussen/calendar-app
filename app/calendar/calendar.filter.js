@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-angular.module('calendar')
-    .filter('duration', function () {
+angular.module("calendar")
+    .filter("duration", function () {
         return function (input) {
             var duration = input.start.hour;
             duration += ":";

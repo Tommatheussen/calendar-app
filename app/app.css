@@ -1,9 +1,9 @@
 .shift-button {
-    margin: 0px;
-    padding: 0px;
-    min-width: 0px;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
     width: 100%;
-    border-radius: 0px;
+    border-radius: 0;
     box-shadow: none !important;
     border: 1px solid black;
 }

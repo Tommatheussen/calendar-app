@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
 angular.
-    module('login').
-    component('login', {
-        templateUrl: 'login/login.tmpl.html',
+    module("login").
+    component("login", {
+        templateUrl: "login/login.tmpl.html",
         controller: loginController,
-        controllerAs: 'vm',
+        controllerAs: "vm",
 		bindings: {
-			flex: '='
+			flex: "="
 		}
     });
 
@@ -24,8 +24,8 @@ function loginController(GAuth, GData, $state) {
     function isLoggedIn() {
         // $cookies.put
         //TODO: Set cookies
-        console.log('user is: ', GData.getUser());
-        $state.go('home');
+        console.log("user is: ", GData.getUser());
+        $state.go("home");
     }
 
     function doLogin() {

@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
 angular.
-    module('calendar').
-    component('calendar', {
-        templateUrl: 'calendar/calendar.tmpl.html',
+    module("calendar").
+    component("calendar", {
+        templateUrl: "calendar/calendar.tmpl.html",
         controller: calendarController,
-        controllerAs: 'vm',
+        controllerAs: "vm",
 		bindings: {
-			flex: '='
+			flex: "="
 		}
     });
 
@@ -20,9 +20,9 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
 
     var previousEvents = {};
     var actions = {
-        'insert': 'events.insert',
-        'delete': 'events.delete',
-        'update': 'events.patch'
+        "insert": "events.insert",
+        "delete": "events.delete",
+        "update": "events.patch"
     }
 
     //TODO: Generic error handling
@@ -35,17 +35,17 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
         
         //TODO: Load event from current month only
 
-        GApi.executeAuth('calendar', 'events.list', {
+        GApi.executeAuth("calendar", "events.list", {
             calendarId: calendarId,
             fields: [
-                'items/start, items/summary, items/id'
+                "items/start, items/summary, items/id"
             ]
             //timeMin: new Date(new Date().setDate(1))
         }).then(function (resp) {
             console.log(resp.items);
             
             resp.items.map(function (event) {
-                var formattedDate = $filter('amDateFormat')(event.start.dateTime, 'DD-MM-YYYY');
+                var formattedDate = $filter("amDateFormat")(event.start.dateTime, "DD-MM-YYYY");
                 previousEvents[formattedDate] = {
                     shift: event.summary,
                     id: event.id
@@ -64,7 +64,7 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
 
     function setPreviousShifts() {
         vm.days.map(function (day) {
-            var formattedDate = $filter('amDateFormat')(day.date, 'DD-MM-YYYY');
+            var formattedDate = $filter("amDateFormat")(day.date, "DD-MM-YYYY");
             day.shift = previousEvents[formattedDate] ? previousEvents[formattedDate].shift : undefined;
         });
     }
@@ -87,31 +87,31 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
             calendarId: calendarId,
         }
 
-        var formattedDate = $filter('amDateFormat')(element.date, 'DD-MM-YYYY');
+        var formattedDate = $filter("amDateFormat")(element.date, "DD-MM-YYYY");
         
         if (element.shift && !previousEvents[formattedDate]) {
-            action = 'insert'; 
+            action = "insert"; 
             params.start = createTime(element.date, vm.shifts[element.shift].start);
             params.end = createTime(element.date, vm.shifts[element.shift].end);
             params.summary = element.shift;
            /* params.extendedProperties = {
                 private: {
-                    shiftTitle: 'test'
+                    shiftTitle: "test"
                 }
             }*/
         } else if (element.shift && previousEvents[formattedDate] && previousEvents[formattedDate].shift !== element.shift) {
             //TODO: Patch
-            action = 'update';
+            action = "update";
             params.eventId = previousEvents[formattedDate].id;
             params.start = createTime(element.date, vm.shifts[element.shift].start);
             params.end = createTime(element.date, vm.shifts[element.shift].end);
             params.summary = element.shift;
         } else if(previousEvents[formattedDate]) {
-            action = 'delete';
+            action = "delete";
             params.eventId = previousEvents[formattedDate].id;
         }
 
-        var req = action ? GApi.createRequest('calendar', actions[action], params) : undefined;
+        var req = action ? GApi.createRequest("calendar", actions[action], params) : undefined;
 
         return req; 
     }
@@ -134,10 +134,10 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
         }, this);
 	}
 
-	vm.smallScreen = $mdMedia('xs');
+	vm.smallScreen = $mdMedia("xs");
 
 	$scope.$watch(function () {
-		return $mdMedia('xs');
+		return $mdMedia("xs");
 	}, function (small) {
 		vm.smallScreen = small;
 	});
