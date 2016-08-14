@@ -25,7 +25,7 @@ function loginController(GAuth, GData, $state) {
         // $cookies.put
         //TODO: Set cookies
         console.log("user is: ", GData.getUser());
-        $state.go("home");
+        $state.go("calendar");
     }
 
     function doLogin() {
