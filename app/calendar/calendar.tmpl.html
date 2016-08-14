@@ -1,10 +1,4 @@
 <div layout="column" flex>
-	<!--<md-list>
-		<md-list-item ng-repeat="calendar in vm.calendars">
-			{{ calendar.summary }}
-		</md-list-item>
-	</md-list>-->
-    
 	<md-button class="md-raised" ng-click="vm.saveShifts()">Save</md-button>
     <md-grid-list md-cols="1" md-cols-gt-xs="7" md-row-height="3:2" md-row-height-gt-xs="3:10" md-row-height-gt-sm="4:8" md-row-height-gt-md="4:4" flex>
         <md-grid-tile ng-if="!vm.smallScreen" ng-repeat="offset in ::vm.getRange(vm.offsetDays) track by $index">

@@ -11,32 +11,53 @@ angular.
 		}
     });
 
-function calendarController($mdMedia, $scope, GApi, calendarService, $window, calendarId) {
+function calendarController($mdMedia, $scope, GApi, calendarService, $window, calendarId, $filter) {
     var vm = this;
 
     vm.$onInit = onInit;
-	vm.saveShifts = saveShifts;
+    vm.saveShifts = saveShifts;
+    
+
+    var previousEvents = {};
+    var actions = {
+        'insert': 'events.insert',
+        'delete': 'events.delete',
+        'update': 'events.patch'
+    }
+
+    //TODO: Generic error handling
+    //TODO: Success on update
 
     function onInit() {
         var today = new Date();
         vm.offsetDays = getOffsetDays(today.getMonth() - 1, today.getUTCFullYear());
         vm.days = getDaysInMonth(today.getMonth() - 1, today.getUTCFullYear());
         
-        //TODO: Load event from current month
+        //TODO: Load event from current month only
 
         GApi.executeAuth('calendar', 'events.list', {
             calendarId: calendarId,
+            fields: [
+                'items/start, items/summary, items/id'
+            ]
             //timeMin: new Date(new Date().setDate(1))
         }).then(function (resp) {
-            console.log(resp);
-            vm.calendars = resp.items;
+            console.log(resp.items);
+            
+            resp.items.map(function (event) {
+                var formattedDate = $filter('amDateFormat')(event.start.dateTime, 'DD-MM-YYYY');
+                previousEvents[formattedDate] = {
+                    shift: event.summary,
+                    id: event.id
+                };
+            });
         }, function (error) {
             console.log(error);
-			});
+        });
 
-		calendarService.getShifts().then(function (shifts) {
-			vm.shifts = shifts;
-		});
+        calendarService.getShifts().then(function (shifts) {
+            vm.shifts = shifts;
+        });
     }
 
     vm.getRange = function (num) {
@@ -51,25 +72,34 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
         return { "dateTime": dateObject };
     }
 
-    var actions = {
-        'insert': 'events.insert',
-        'delete': 'events.delete',
-        'update': 'events.patch'
-    }
-
     function createRequest(element) {
         var action;
         var params = {
             calendarId: calendarId,
         }
 
-        //TODO: Patch and delete functions, load data from google first
-
-        if (element.shift) {
+        var formattedDate = $filter('amDateFormat')(element.date, 'DD-MM-YYYY');
+        
+        if (element.shift && !previousEvents[formattedDate]) {
             action = 'insert'; 
             params.start = createTime(element.date, vm.shifts[element.shift].start);
             params.end = createTime(element.date, vm.shifts[element.shift].end);
             params.summary = element.shift;
+           /* params.extendedProperties = {
+                private: {
+                    shiftTitle: 'test'
+                }
+            }*/
+        } else if (element.shift && previousEvents[formattedDate] && previousEvents[formattedDate].shift !== element.shift) {
+            //TODO: Patch
+            action = 'update';
+            params.eventId = previousEvents[formattedDate].id;
+            params.start = createTime(element.date, vm.shifts[element.shift].start);
+            params.end = createTime(element.date, vm.shifts[element.shift].end);
+            params.summary = element.shift;
+        } else if(previousEvents[formattedDate]) {
+            action = 'delete';
+            params.eventId = previousEvents[formattedDate].id;
         }
 
         var req = action ? GApi.createRequest('calendar', actions[action], params) : undefined;

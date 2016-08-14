@@ -8,5 +8,6 @@ angular.module('calendarApp', [
     'ui.router',
 	'angular-google-gapi',
 	'angulartics',
-	'angulartics.google.analytics'
+    'angulartics.google.analytics',
+    'angularMoment'
 ]);
