@@ -51,12 +51,21 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
                     id: event.id
                 };
             });
+
+            setPreviousShifts();
         }, function (error) {
             console.log(error);
         });
 
         calendarService.getShifts().then(function (shifts) {
             vm.shifts = shifts;
+        });
+    }
+
+    function setPreviousShifts() {
+        vm.days.map(function (day) {
+            var formattedDate = $filter('amDateFormat')(day.date, 'DD-MM-YYYY');
+            day.shift = previousEvents[formattedDate] ? previousEvents[formattedDate].shift : undefined;
         });
     }
 
@@ -117,8 +126,6 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
                 batch.add(possibleRequest);
             }
         }, this);
-
-        console.log(batch);
         
         batch.then(function (ok) {
             console.log(ok);
