@@ -30,31 +30,17 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
 
     function onInit() {
         var today = new Date();
-        vm.offsetDays = getOffsetDays(today.getMonth() - 1, today.getUTCFullYear());
-        vm.days = getDaysInMonth(today.getMonth() - 1, today.getUTCFullYear());
-        
-        //TODO: Load event from current month only
+        vm.offsetDays = getOffsetDays(today.getMonth(), today.getUTCFullYear());
+        vm.days = getDaysInMonth(today.getMonth(), today.getUTCFullYear());
 
-        GApi.executeAuth("calendar", "events.list", {
-            calendarId: calendarId,
-            fields: [
-                "items/start, items/summary, items/id"
-            ]
-            //timeMin: new Date(new Date().setDate(1))
-        }).then(function (resp) {
-            console.log(resp.items);
-            
-            resp.items.map(function (event) {
-                var formattedDate = $filter("amDateFormat")(event.start.dateTime, "DD-MM-YYYY");
-                previousEvents[formattedDate] = {
-                    shift: event.summary,
-                    id: event.id
-                };
-            });
+        var timeMin = new Date(today.getFullYear(), today.getMonth(), 1).toISOString();
+        var timeMax = new Date(today.getFullYear(), today.getMonth() + 1, 0)
+            .toISOString();
+
+        calendarService.getPreviousEvents(timeMin, timeMax).then(function (events) {
+            previousEvents = events;
 
             setPreviousShifts();
-        }, function (error) {
-            console.log(error);
         });
 
         calendarService.getShifts().then(function (shifts) {
@@ -99,14 +85,14 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
                     shiftTitle: "test"
                 }
             }*/
-        } else if (element.shift && previousEvents[formattedDate] && previousEvents[formattedDate].shift !== element.shift) {
+        } else if (element.shift && previousEvents[formattedDate] && previousEvents[formattedDate] !== element.shift) {
             //TODO: Patch
             action = "update";
             params.eventId = previousEvents[formattedDate].id;
             params.start = createTime(element.date, vm.shifts[element.shift].start);
             params.end = createTime(element.date, vm.shifts[element.shift].end);
             params.summary = element.shift;
-        } else if(previousEvents[formattedDate]) {
+        } else if(!element.shift && previousEvents[formattedDate]) {
             action = "delete";
             params.eventId = previousEvents[formattedDate].id;
         }
@@ -126,13 +112,19 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
                 batch.add(possibleRequest);
             }
         }, this);
-        
+
         batch.then(function (ok) {
             console.log(ok);
+
+            vm.days.forEach(function (day) {
+                var formattedDate = $filter("amDateFormat")(day.date, "DD-MM-YYYY");
+
+                previousEvents[formattedDate] = day.shift;
+            }, this);
         }, function (error) {
             console.log(error);
         }, this);
-	}
+    }
 
 	vm.smallScreen = $mdMedia("xs");
 
