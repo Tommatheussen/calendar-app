@@ -15,8 +15,7 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
     var vm = this;
 
     vm.$onInit = onInit;
-    vm.saveShifts = saveShifts;
-    
+    vm.saveShifts = saveShifts;    
 
     var previousEvents = {};
     var actions = {
@@ -25,7 +24,7 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
         "update": "events.patch"
     }
 
-    //TODO: Generic error handling
+    //TODO: Generic error handling -> Open an infowindow 
     //TODO: Success on update
 
     function onInit() {
@@ -80,13 +79,7 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
             params.start = createTime(element.date, vm.shifts[element.shift].start);
             params.end = createTime(element.date, vm.shifts[element.shift].end);
             params.summary = element.shift;
-           /* params.extendedProperties = {
-                private: {
-                    shiftTitle: "test"
-                }
-            }*/
-        } else if (element.shift && previousEvents[formattedDate] && previousEvents[formattedDate] !== element.shift) {
-            //TODO: Patch
+        } else if (element.shift && previousEvents[formattedDate] && previousEvents[formattedDate].shift !== element.shift) {
             action = "update";
             params.eventId = previousEvents[formattedDate].id;
             params.start = createTime(element.date, vm.shifts[element.shift].start);
@@ -103,27 +96,35 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
     }
 
     function saveShifts() {
-        var batch = $window.gapi.client.newBatch();
+        var allRequests = [];
 
         vm.days.forEach(function (element) {
             var possibleRequest = createRequest(element);
 
             if (possibleRequest) {
-                batch.add(possibleRequest);
+                allRequests.push(possibleRequest);
             }
         }, this);
 
-        batch.then(function (ok) {
-            console.log(ok);
+        if (allRequests.length > 0) {
+            var batch = $window.gapi.client.newBatch();
 
-            vm.days.forEach(function (day) {
-                var formattedDate = $filter("amDateFormat")(day.date, "DD-MM-YYYY");
+            for (var i = 0; i < allRequests.length; i++) {
+                batch.add(allRequests[i]);
+            }
 
-                previousEvents[formattedDate] = day.shift;
+            batch.then(function (ok) {
+                console.log(ok);
+
+                vm.days.forEach(function (day) {
+                    var formattedDate = $filter("amDateFormat")(day.date, "DD-MM-YYYY");
+
+                    previousEvents[formattedDate] = day.shift;
+                }, this);
+            }, function (error) {
+                console.log(error);
             }, this);
-        }, function (error) {
-            console.log(error);
-        }, this);
+        }    
     }
 
 	vm.smallScreen = $mdMedia("xs");
