@@ -3,7 +3,7 @@
 
     angular
         .module("calendarApp")
-        .run(appRun)
+        .run(appRun);
 
     function appRun(GAuth, GApi, $state, $transitions, $q) {
         var CLIENT = "576434137862-eb52i5mrh8lag6tpnsrpviqjfntprnq3.apps.googleusercontent.com";
@@ -27,5 +27,5 @@
 
             return deferred.promise;
         });
-    };
+    }
 })();

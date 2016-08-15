@@ -21,7 +21,7 @@
 
             function getPreviousEvents(timeMin, timeMax) {
                 return GApi.executeAuth("calendar", "events.list", {
-                    calendarId: calendarId,
+                    calendarId,
                     fields: [
                         "items/start, items/summary, items/id"
                     ],

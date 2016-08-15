@@ -72,7 +72,7 @@
             var action;
             var params = {
                 calendarId,
-            }
+            };
 
             var formattedDate = $filter("amDateFormat")(element.date, "DD-MM-YYYY");
         
