@@ -1,6 +1,9 @@
-"use strict";
+(function () {
+    "use strict";
 
-angular.module("login", [
-    "angular-google-gapi",
-    "ui.router"
-]);
+    angular
+        .module("login", [
+            "angular-google-gapi",
+            "ui.router"
+        ]);
+})();

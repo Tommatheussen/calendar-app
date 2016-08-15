@@ -1,7 +1,10 @@
-"use strict";
+(function () {
+    "use strict";
 
-angular.module("calendarApp")
-    .config(function ($urlRouterProvider, $analyticsProvider) {
-        $urlRouterProvider.otherwise("/");
-        $analyticsProvider.trackExceptions(true);
-	});
+    angular
+        .module("calendarApp")
+        .config(function ($urlRouterProvider, $analyticsProvider) {
+            $urlRouterProvider.otherwise("/");
+            $analyticsProvider.trackExceptions(true);
+        });
+})();

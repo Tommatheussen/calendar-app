@@ -1,12 +1,15 @@
-"use strict";
+(function () {
+    "use strict";
 
-angular.module("calendar")
-	.config(function ($stateProvider) {
-        var calendarState = {
-            name: "calendar",
-            url: "/",
-            component: "calendar"
-        };
+    angular
+        .module("calendar")
+        .config(function ($stateProvider) {
+            var calendarState = {
+                name: "calendar",
+                url: "/",
+                component: "calendar"
+            };
 
-        $stateProvider.state(calendarState);
-	});
+            $stateProvider.state(calendarState);
+        });
+})();

@@ -1,6 +1,9 @@
-"use strict";
+(function () {
+    "use strict";
 
-angular.module("calendar", [
-    "ngMaterial",
-    "ui.router"
-]);
+    angular
+        .module("calendar", [
+            "ngMaterial",
+            "ui.router"
+        ]);
+})();

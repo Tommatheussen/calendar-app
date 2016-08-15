@@ -1,6 +1,9 @@
-"use strict";
+(function () {
+    "use strict";
 
-angular.module("topToolbar", [
-    "ngMaterial",
-	"angular-google-gapi"
-]);
+    angular
+        .module("topToolbar", [
+            "ngMaterial",
+            "angular-google-gapi"
+        ]);
+})();
