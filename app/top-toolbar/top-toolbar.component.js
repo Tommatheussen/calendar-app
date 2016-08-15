@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
 angular.
-    module('topToolbar').
-    component('topToolbar', {
-        templateUrl: 'top-toolbar/top-toolbar.tmpl.html',
+    module("topToolbar").
+    component("topToolbar", {
+        templateUrl: "top-toolbar/top-toolbar.tmpl.html",
         controller: topToolbarController,
-        controllerAs: 'vm'
+        controllerAs: "vm"
     });
 
 function topToolbarController(GAuth, GData, $state) {
@@ -16,8 +16,8 @@ function topToolbarController(GAuth, GData, $state) {
 	vm.isLoggedIn = GData.isLogin;
 
 	function goToLogin() {
-		if (!$state.is('login')) {
-			$state.go('login');
+		if (!$state.is("login")) {
+			$state.go("login");
 		}
 	}
 }

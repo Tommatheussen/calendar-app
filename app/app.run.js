@@ -1,12 +1,14 @@
 "use strict";
 
 angular.module("calendarApp")
-	.run(function (GAuth, GApi, $state, $transitions, $q) {
+    .run(appRun)
+
+function appRun(GAuth, GApi, $state, $transitions, $q) {
 		var CLIENT = "576434137862-eb52i5mrh8lag6tpnsrpviqjfntprnq3.apps.googleusercontent.com";
 
         GApi.load("calendar", "v3")
             .catch(function (api, version) {
-                console.log("error occured", api, version)
+                console.log("error occured", api, version);
             });
 
 		GAuth.setClient(CLIENT);
@@ -23,4 +25,4 @@ angular.module("calendarApp")
 
 			return deferred.promise;
 		});
-	});
+};

@@ -11,5 +11,5 @@ angular.module("calendar")
             duration += ":";
             duration += input.end.minute;
             return duration;
-        }
+        };
 	});

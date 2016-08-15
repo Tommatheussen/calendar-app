@@ -15,14 +15,15 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
     var vm = this;
 
     vm.$onInit = onInit;
-    vm.saveShifts = saveShifts;    
+    vm.saveShifts = saveShifts;
+    vm.getRange = getRange;
 
     var previousEvents = {};
     var actions = {
         "insert": "events.insert",
         "delete": "events.delete",
         "update": "events.patch"
-    }
+    };
 
     //TODO: Generic error handling -> Open an infowindow 
     //TODO: Success on update
@@ -50,11 +51,11 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
     function setPreviousShifts() {
         vm.days.map(function (day) {
             var formattedDate = $filter("amDateFormat")(day.date, "DD-MM-YYYY");
-            day.shift = previousEvents[formattedDate] ? previousEvents[formattedDate].shift : undefined;
+            day.shift = previousEvents[formattedDate] ? previousEvents[formattedDate].shift : null;
         });
     }
 
-    vm.getRange = function (num) {
+    function getRange(num) {
         return new Array(num);
     }
 
@@ -69,7 +70,7 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
     function createRequest(element) {
         var action;
         var params = {
-            calendarId: calendarId,
+            calendarId,
         }
 
         var formattedDate = $filter("amDateFormat")(element.date, "DD-MM-YYYY");
@@ -90,7 +91,7 @@ function calendarController($mdMedia, $scope, GApi, calendarService, $window, ca
             params.eventId = previousEvents[formattedDate].id;
         }
 
-        var req = action ? GApi.createRequest("calendar", actions[action], params) : undefined;
+        var req = action ? GApi.createRequest("calendar", actions[action], params) : null;
 
         return req; 
     }
