@@ -12,7 +12,7 @@
             }
         });
 
-    function calendarController($mdMedia, $scope, GApi, calendarService, $window, calendarId, $filter) {
+    function calendarController($mdMedia, $scope, GApi, calendarService, $window, calendarId, $filter, $mdDialog) {
         var vm = this;
 
         vm.$onInit = onInit;
@@ -116,13 +116,18 @@
                 }
 
                 batch.then(function (ok) {
-                    console.log(ok);
-
                     vm.days.forEach(function (day) {
                         var formattedDate = $filter("amDateFormat")(day.date, "DD-MM-YYYY");
 
                         previousEvents[formattedDate] = day.shift;
                     }, this);
+
+                    var dialog = $mdDialog.alert()
+                        .title('Update success')
+                        .textContent('De shiften zijn succesvol opgeslagen in Google Calendar.')
+                        .ok('Super!');
+                    
+                    $mdDialog.show(dialog);
                 }, function (error) {
                     console.log(error);
                 }, this);
