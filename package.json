@@ -1,14 +1,16 @@
 {
   "name": "calendar-app",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "description": "App that allows me girlfriend to save her working shifts, so they get synced with Google Calendar",
   "dependencies": {},
   "devDependencies": {
+    "babel-preset-es2015": "^6.13.2",
     "bower": "^1.7.9",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-templatecache": "^2.0.0",
+    "gulp-babel": "^6.1.2",
     "gulp-bump": "^2.2.0",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.0",

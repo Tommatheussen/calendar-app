@@ -13,6 +13,8 @@ var runSequence = require("gulp-run-sequence");
 var injectVersion = require("gulp-inject-version");
 var bump = require("gulp-bump");
 var jsonminify = require("gulp-jsonminify");
+var argv = require('yargs').argv;
+var babel = require('gulp-babel');
 
 gulp.task("clean", function () {
     return del.sync([
@@ -43,9 +45,11 @@ gulp.task("build-vendor-js", function () {
 gulp.task("build-app-js", ["build-template-cache"], function () {
     return gulp.src([
 		"./app/**/*.js",
-		"./.tmp/templates.js",
 		"!./app/bower_components/**"])
-		.pipe(ngAnnotate())
+        .pipe(ngAnnotate())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(uglify())
 		.pipe(angularFilesort())
         .pipe(concat("app.min.js"))
@@ -131,8 +135,9 @@ gulp.task("bump", function (done) {
 });
 
 gulp.task("bump-v", function () {
+    var type = argv.version || 'patch';
 	return gulp.src("./package.json")
-		.pipe(bump())
+		.pipe(bump({ type: type }))
 		.pipe(gulp.dest("./"));
 });
 
