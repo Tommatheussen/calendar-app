@@ -12,7 +12,7 @@
             }
         });
 
-    function calendarController($mdMedia, $scope, GApi, calendarService, $window, calendarId, $filter, $mdDialog) {
+    function calendarController($mdMedia, $scope, GApi, calendarService, $window, calendarId, $filter, $mdDialog, $rootScope) {
         var vm = this;
 
         vm.$onInit = onInit;
@@ -32,6 +32,16 @@
 			vm.currentDate.setMonth(vm.currentDate.getMonth() + 1, 1);
 			monthUpdated();
 		}
+
+        var tempShift;
+        $rootScope.$on('help:opened', function () {
+            tempShift = angular.copy(vm.days[9 - vm.offsetDays].shift);
+            vm.days[9 - vm.offsetDays].shift = 'klv';
+        });
+
+        $rootScope.$on('help:closed', function () {
+            vm.days[9 - vm.offsetDays].shift = tempShift;
+        });
 
         var previousEvents = {};
         var actions = {
@@ -113,9 +123,8 @@
 
         function saveShifts() {
             var allRequests = [];
-
-            $rootScope.showHelp = true;            
-            /*vm.days.forEach(function (element) {
+          
+            vm.days.forEach(function (element) {
                 var possibleRequest = createRequest(element);
 
                 if (possibleRequest) {
@@ -146,7 +155,7 @@
                 }, function (error) {
                     console.log(error);
                 }, this);
-            }*/
+            }
         }
 
 /*        vm.smallScreen = $mdMedia("xs");
