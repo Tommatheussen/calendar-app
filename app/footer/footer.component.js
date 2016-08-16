@@ -13,6 +13,9 @@
         var vm = this;
 
         vm.openHelp = openHelp;
+        $rootScope.$on('help:closed', function () {
+            $rootScope.showHelp = false;
+        });
 
         function openHelp() {
             $rootScope.showHelp = true;
