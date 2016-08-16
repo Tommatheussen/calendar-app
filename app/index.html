@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <title>Calendar App</title>
 
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 		<!-- vendor:css -->
-        <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css"/>
+        <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+        <link rel="stylesheet" href="bower_components/chardin.js/chardinjs.css">
 		<!-- endinject -->
 
 		<!-- inject:css -->
@@ -16,13 +16,15 @@
 		<!-- endinject -->
     </head>
 
-    <body ng-app="calendarApp" layout="column" flex>
+    <body ng-app="calendarApp" layout="column" flex help-overlay="showHelp">
         <top-toolbar></top-toolbar>
         <md-content flex layout-fill>
             <ui-view layout="row" layout-fill flex layout-align="center"></ui-view>
         </md-content>
 		<footer></footer>
 		<!-- vendor:js -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/chardin.js/chardinjs.min.js"></script>
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-animate/angular-animate.min.js"></script>
         <script src="bower_components/angular-aria/angular-aria.min.js"></script>
@@ -33,6 +35,7 @@
 		<script src="bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js"></script>
         <script src="bower_components/moment/moment.js"></script>
         <script src="bower_components/angular-moment/angular-moment.js"></script>
+        <Script src="bower_components/angular-help-overlay/lib/angular-help-overlay.js"></script>
         <!-- endinject -->
 
 		<!-- inject:js -->

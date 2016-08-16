@@ -13,6 +13,7 @@
             "angular-google-gapi",
             "angulartics",
             "angulartics.google.analytics",
-            "angularMoment"
+            "angularMoment",
+            "angularHelpOverlay"
         ]);
 })();

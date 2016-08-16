@@ -9,7 +9,13 @@
             controllerAs: "vm"
         });
 
-    function footerController(GAuth, GData, $state) {
+    function footerController($rootScope) {
         var vm = this;
+
+        vm.openHelp = openHelp;
+
+        function openHelp() {
+            $rootScope.showHelp = true;
+        }
     }
 })();

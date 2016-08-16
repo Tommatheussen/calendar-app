@@ -114,7 +114,8 @@
         function saveShifts() {
             var allRequests = [];
 
-            vm.days.forEach(function (element) {
+            $rootScope.showHelp = true;            
+            /*vm.days.forEach(function (element) {
                 var possibleRequest = createRequest(element);
 
                 if (possibleRequest) {
@@ -145,7 +146,7 @@
                 }, function (error) {
                     console.log(error);
                 }, this);
-            }
+            }*/
         }
 
 /*        vm.smallScreen = $mdMedia("xs");
