@@ -1,5 +1,21 @@
 <div layout="column" flex>
-	<md-button class="md-raised" ng-click="vm.saveShifts()">Save</md-button>
+	<md-card>
+		<md-card-actions layout="row">
+			<md-card-icon-actions>
+				<md-button class="md-icon-button" aria-label="Favorite">
+				<md-icon>keyboard_arrow_left</md-icon>
+				</md-button>
+			</md-card-icon-actions>
+
+			<md-button class="md-raised" ng-click="vm.saveShifts()">Save</md-button>
+
+			<md-card-icon-actions>
+				<md-button class="md-icon-button" aria-label="Share">
+				<md-icon>keyboard_arrow_right</md-icon>
+				</md-button>
+			</md-card-icon-actions>
+		</md-card-actions>
+	</md-card>
     <md-grid-list md-cols="1" md-cols-gt-xs="7" md-row-height="3:2" md-row-height-gt-xs="3:10" md-row-height-gt-sm="4:8" md-row-height-gt-md="4:4" flex>
         <md-grid-tile ng-if="!vm.smallScreen" ng-repeat="offset in ::vm.getRange(vm.offsetDays) track by $index">
             <md-grid-tile-header>
