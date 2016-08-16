@@ -7,6 +7,7 @@
             "calendar",
             "login",
             "topToolbar",
+			"footer",
             "ui.router",
             "angular-google-gapi",
             "angulartics",
