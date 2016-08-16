@@ -4,6 +4,9 @@
         <meta charset="utf-8">
         <title>Calendar App</title>
 
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
 		<!-- vendor:css -->
         <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css"/>
 		<!-- endinject -->
@@ -20,12 +23,15 @@
         </md-content>
 
 		<md-toolbar flex="none">
-			<span flex></span>
-			<h2 class="md-toolbar-tools">
-				<span class="md-flex">
-					Version: %%GULP_INJECT_VERSION%%
-				</span>
-			</h2>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Version: %%GULP_INJECT_VERSION%%</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button">
+					<md-icon>help outline</md-icon>
+				</md-button>
+			</div>
 		</md-toolbar>
 		<!-- vendor:js -->
         <script src="bower_components/angular/angular.min.js"></script>
