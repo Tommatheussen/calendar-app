@@ -8,6 +8,7 @@
             "login",
             "topToolbar",
 			"footer",
+			'error',
             "ui.router",
             "angular-google-gapi",
             "angulartics",

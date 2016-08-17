@@ -3,7 +3,7 @@
 
     angular
         .module("calendar")
-        .factory("calendarService", function ($http, GApi, calendarId, $filter) {
+        .factory("calendarService", function ($http, GApi, calendarId, $filter, errorService, $q) {
             return {
                 getShifts,
                 getPreviousEvents
@@ -30,7 +30,7 @@
                 })
                     .then(getPreviousEventsComplete)
                     .catch(errorHandling);
-            
+
                 function getPreviousEventsComplete(response) {
                     var events = {};
                     response.items.map(function (event) {
@@ -47,6 +47,8 @@
 
             function errorHandling(error) {
                 console.log(error);
+				errorService.addToast(error);
+				return $q.reject(error);
             }
 
         });
