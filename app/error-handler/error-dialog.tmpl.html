@@ -18,6 +18,19 @@
 
 		<p>
 			Geef ook deze info mee aan je schatje:
-			<pre>{{ vm.error.stack }}</pre>
+			<p ng-if="vm.error.stack">
+				<strong>Stacktrace</strong>
+				<pre>{{ vm.error.stack }}</pre>
+			</p>
+			<p ng-if="vm.error.data">
+				<strong>Data</strong>
+				<pre>{{ vm.error.data | json }}</pre>
+			</p>
+
+			<hr ng-if="vm.error">
+			<p ng-if="vm.error">
+				<strong>Full Error</strong>
+				<pre>{{ vm.error | json }}</pre>
+			</p>
 	</div>
 </md-dialog-content>
