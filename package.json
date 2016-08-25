@@ -1,6 +1,6 @@
 {
   "name": "calendar-app",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "App that allows me girlfriend to save her working shifts, so they get synced with Google Calendar",
   "dependencies": {},
   "devDependencies": {
