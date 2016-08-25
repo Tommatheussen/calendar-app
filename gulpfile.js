@@ -142,7 +142,7 @@ gulp.task("bump-v", function () {
 });
 
 gulp.task("inject-v", function (done) {
-	return gulp.src("./dist/index.html")
+	return gulp.src("./dist/app.templates.js")
 		.pipe(injectVersion())
 		.pipe(gulp.dest("./dist"));
 });
