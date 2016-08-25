@@ -26,7 +26,7 @@
             "update": "events.patch"
         };
 
-        //TODO: Generic error handling -> Open an infowindow 
+        //TODO: Generic error handling -> Open an infowindow
         //TODO: Success on update
 
         function onInit() {
@@ -35,7 +35,7 @@
             vm.days = getDaysInMonth(today.getMonth(), today.getUTCFullYear());
 
             var timeMin = new Date(today.getFullYear(), today.getMonth(), 1).toISOString();
-            var timeMax = new Date(today.getFullYear(), today.getMonth() + 1, 0)
+            var timeMax = new Date(today.getFullYear(), today.getMonth() + 1, 1)
                 .toISOString();
 
             calendarService.getPreviousEvents(timeMin, timeMax).then(function (events) {
@@ -75,7 +75,7 @@
             };
 
             var formattedDate = $filter("amDateFormat")(element.date, "DD-MM-YYYY");
-        
+
             if (element.shift && !previousEvents[formattedDate]) {
                 action = "insert";
                 params.start = createTime(element.date, vm.shifts[element.shift].start);
@@ -126,7 +126,7 @@
                         .title('Update success')
                         .textContent('De shiften zijn succesvol opgeslagen in Google Calendar.')
                         .ok('Super!');
-                    
+
                     $mdDialog.show(dialog);
                 }, function (error) {
                     console.log(error);
