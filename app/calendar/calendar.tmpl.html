@@ -24,7 +24,7 @@
 					{{ ::day.date | date: dd-MM-YYYY }}
 				</span>
 				<md-grid-list md-cols="4" md-row-height="3:2" flex>
-					<md-grid-tile ng-repeat="(shift, times) in vm.shifts" md-ink-ripple class="md-clickable">
+					<md-grid-tile ng-repeat="(shift, times) in vm.shifts" md-ink-ripple class="md-clickable grid-shift">
 						{{ ::shift }}
 					</md-grid-tile>
 				</md-grid-list>
@@ -32,7 +32,7 @@
 		</md-list-item>
 	</md-list>
 
-    <md-grid-list md-cols="1" md-cols-gt-xs="7" md-row-height="3:2" md-row-height-gt-xs="3:10" md-row-height-gt-sm="4:8" md-row-height-gt-md="4:4" flex>
+    <!--<md-grid-list md-cols="1" md-cols-gt-xs="7" md-row-height="3:2" md-row-height-gt-xs="3:10" md-row-height-gt-sm="4:8" md-row-height-gt-md="4:4" flex>
         <md-grid-tile hide-xs  ng-repeat="offset in ::vm.getRange(vm.offsetDays) track by $index">
             <md-grid-tile-header>
             </md-grid-tile-header>
@@ -54,5 +54,5 @@
 				</div>
             </div>
         </md-grid-tile>
-    </md-grid-list>
+    </md-grid-list>-->
 </div>

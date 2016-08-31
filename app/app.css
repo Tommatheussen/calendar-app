@@ -37,3 +37,12 @@
 	min-width: calc(100% / 7) !important;
 	padding: 0px !important;
 }
+
+.md-list-item-text md-grid-list {
+	margin: 0px 0.5px;
+}
+
+.grid-shift {
+	cursor: pointer;
+	background-color: lightblue;
+}
