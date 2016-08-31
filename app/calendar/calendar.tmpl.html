@@ -29,33 +29,12 @@
 				<md-grid-list md-cols="4" md-row-height="3:2" flex>
 					<md-grid-tile ng-repeat="(shift, times) in vm.shifts" ng-click="vm.setShift(day, shift)" ng-class="{ 'active': day.shift === shift }" md-ink-ripple class="md-clickable grid-shift">
 						{{ ::shift }}
+						<md-tooltip>
+                        	{{ ::times | duration }}
+						</md-tooltip>
 					</md-grid-tile>
 				</md-grid-list>
 			</div>
 		</md-list-item>
 	</md-list>
-
-    <!--<md-grid-list md-cols="1" md-cols-gt-xs="7" md-row-height="3:2" md-row-height-gt-xs="3:10" md-row-height-gt-sm="4:8" md-row-height-gt-md="4:4" flex>
-        <md-grid-tile hide-xs  ng-repeat="offset in ::vm.getRange(vm.offsetDays) track by $index">
-            <md-grid-tile-header>
-            </md-grid-tile-header>
-        </md-grid-tile>
-        <md-grid-tile ng-repeat="day in vm.days" class="calendar-grid">
-			<div layout="column" flex layout-fill>
-				<md-grid-tile-header>
-					<h3 class="calendar-header">{{ ::day.date | date: dd-MM-YYYY }}</h3>
-				</md-grid-tile-header>
-				<div layout="row" layout-wrap class="calendar-content">
-					<div flex="20" flex-gt-xs="50" flex-gt-md="25" ng-repeat="(shift, times) in vm.shifts">
-						<md-button ng-click="vm.setShift(day, shift)" class="md-raised md-primary shift-button" ng-class="{ 'active': day.shift === shift }">
-							<md-tooltip>
-                                {{ ::times | duration }}
-							</md-tooltip>
-							{{ ::shift }}
-						</md-button>
-					</div>
-				</div>
-            </div>
-        </md-grid-tile>
-    </md-grid-list>-->
 </div>
