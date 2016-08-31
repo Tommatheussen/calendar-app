@@ -18,8 +18,22 @@
         vm.$onInit = onInit;
         vm.saveShifts = saveShifts;
         vm.getRange = getRange;
+		vm.prevMonth = prevMonth;
+		vm.nextMonth = nextMonth;
+		vm.today = new Date();
+
+		function prevMonth() {
+			currentDate.setMonth(currentDate.getMonth() - 1, 1);
+			monthUpdated();
+		}
+
+		function nextMonth() {
+			currentDate.setMonth(currentDate.getMonth() + 1, 1);
+			monthUpdated();
+		}
 
         var previousEvents = {};
+        var currentDate = new Date();
         var actions = {
             "insert": "events.insert",
             "delete": "events.delete",
@@ -27,24 +41,27 @@
         };
 
         function onInit() {
-            var today = new Date();
-            vm.offsetDays = getOffsetDays(today.getMonth(), today.getUTCFullYear());
-            vm.days = getDaysInMonth(today.getMonth(), today.getUTCFullYear());
+        	calendarService.getShifts().then(function (shifts) {
+                vm.shifts = shifts;
+            });
 
-            var timeMin = new Date(today.getFullYear(), today.getMonth(), 1).toISOString();
-            var timeMax = new Date(today.getFullYear(), today.getMonth() + 1, 1)
+			monthUpdated();
+        }
+
+		function monthUpdated() {
+			vm.offsetDays = getOffsetDays(currentDate.getMonth(), currentDate.getUTCFullYear());
+            vm.days = getDaysInMonth(currentDate.getMonth(), currentDate.getUTCFullYear());
+
+            var timeMin = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString();
+            var timeMax = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
                 .toISOString();
 
-            calendarService.getPreviousEvents(timeMin, timeMax).then(function (events) {
+			calendarService.getPreviousEvents(timeMin, timeMax).then(function (events) {
                 previousEvents = events;
 
                 setPreviousShifts();
             });
-
-            calendarService.getShifts().then(function (shifts) {
-                vm.shifts = shifts;
-            });
-        }
+		}
 
         function setPreviousShifts() {
             vm.days.map(function (day) {

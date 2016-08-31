@@ -2,7 +2,7 @@
 	<md-card>
 		<md-card-actions layout="row">
 			<md-card-icon-actions>
-				<md-button class="md-icon-button" aria-label="Favorite">
+				<md-button class="md-icon-button" aria-label="Favorite" ng-click="vm.prevMonth()">
 				<md-icon>keyboard_arrow_left</md-icon>
 				</md-button>
 			</md-card-icon-actions>
@@ -10,7 +10,7 @@
 			<md-button class="md-raised" ng-click="vm.saveShifts()">Save</md-button>
 
 			<md-card-icon-actions>
-				<md-button class="md-icon-button" aria-label="Share">
+				<md-button class="md-icon-button" aria-label="Share" ng-click="vm.nextMonth()">
 				<md-icon>keyboard_arrow_right</md-icon>
 				</md-button>
 			</md-card-icon-actions>
@@ -18,7 +18,7 @@
 	</md-card>
 
 	<md-list layout="row" layout-wrap>
-		<md-list-item hide-xs ng-repeat="offset in ::vm.getRange(vm.offsetDays) track by $index" class="offset-edge">
+		<md-list-item hide-xs ng-repeat="offset in vm.getRange(vm.offsetDays) track by $index" class="offset-edge">
 			<div class="day-offset" flex></div>
 		</md-list-item>
 		<md-list-item ng-repeat="day in vm.days" class="edge">
