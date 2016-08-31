@@ -18,13 +18,16 @@
 	</md-card>
 
 	<md-list layout="row" layout-wrap>
+		<md-list-item hide-xs ng-repeat="offset in ::vm.getRange(vm.offsetDays) track by $index" class="offset-edge">
+			<div class="day-offset" flex></div>
+		</md-list-item>
 		<md-list-item ng-repeat="day in vm.days" class="edge">
 			<div class="md-list-item-text" layout="column" flex>
 				<span class="day-header">
 					{{ ::day.date | date: dd-MM-YYYY }}
 				</span>
 				<md-grid-list md-cols="4" md-row-height="3:2" flex>
-					<md-grid-tile ng-repeat="(shift, times) in vm.shifts" md-ink-ripple class="md-clickable grid-shift">
+					<md-grid-tile ng-repeat="(shift, times) in vm.shifts" ng-click="vm.setShift(day, shift)" ng-class="{ 'active': day.shift === shift }" md-ink-ripple class="md-clickable grid-shift">
 						{{ ::shift }}
 					</md-grid-tile>
 				</md-grid-list>

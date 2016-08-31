@@ -26,9 +26,6 @@
             "update": "events.patch"
         };
 
-        //TODO: Generic error handling -> Open an infowindow
-        //TODO: Success on update
-
         function onInit() {
             var today = new Date();
             vm.offsetDays = getOffsetDays(today.getMonth(), today.getUTCFullYear());
