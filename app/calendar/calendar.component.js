@@ -21,19 +21,19 @@
 		vm.prevMonth = prevMonth;
 		vm.nextMonth = nextMonth;
 		vm.today = new Date();
+        vm.currentDate = new Date();
 
 		function prevMonth() {
-			currentDate.setMonth(currentDate.getMonth() - 1, 1);
+			vm.currentDate.setMonth(vm.currentDate.getMonth() - 1, 1);
 			monthUpdated();
 		}
 
 		function nextMonth() {
-			currentDate.setMonth(currentDate.getMonth() + 1, 1);
+			vm.currentDate.setMonth(vm.currentDate.getMonth() + 1, 1);
 			monthUpdated();
 		}
 
         var previousEvents = {};
-        var currentDate = new Date();
         var actions = {
             "insert": "events.insert",
             "delete": "events.delete",
@@ -49,11 +49,11 @@
         }
 
 		function monthUpdated() {
-			vm.offsetDays = getOffsetDays(currentDate.getMonth(), currentDate.getUTCFullYear());
-            vm.days = getDaysInMonth(currentDate.getMonth(), currentDate.getUTCFullYear());
+			vm.offsetDays = getOffsetDays(vm.currentDate.getMonth(), vm.currentDate.getUTCFullYear());
+            vm.days = getDaysInMonth(vm.currentDate.getMonth(), vm.currentDate.getUTCFullYear());
 
-            var timeMin = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString();
-            var timeMax = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+            var timeMin = new Date(vm.currentDate.getFullYear(), vm.currentDate.getMonth(), 1).toISOString();
+            var timeMax = new Date(vm.currentDate.getFullYear(), vm.currentDate.getMonth() + 1, 1)
                 .toISOString();
 
 			calendarService.getPreviousEvents(timeMin, timeMax).then(function (events) {
