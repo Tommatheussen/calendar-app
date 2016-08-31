@@ -148,13 +148,13 @@
             }
         }
 
-        vm.smallScreen = $mdMedia("xs");
+/*        vm.smallScreen = $mdMedia("xs");
 
         $scope.$watch(function () {
             return $mdMedia("xs");
         }, function (small) {
             vm.smallScreen = small;
-        });
+        });*/
 
         vm.setShift = function (day, shift) {
             day.shift === shift ? day.shift = null : day.shift = shift;
