@@ -11,6 +11,13 @@
 	margin: 0px 0.5px;
 }
 
+.day-header {
+	background-color: rgba(0, 0, 0, 0.18);
+	padding: 10px 0px 10px 25px;
+	margin: 0px 0.5px;
+	font-size: 20px;
+}
+
 .edge {
 	max-width: calc(100% / 7) !important;
 	min-width: calc(100% / 7) !important;
