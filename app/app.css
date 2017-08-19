@@ -30,13 +30,17 @@
 
 .grid-shift {
 	cursor: pointer;
-	background-color: lightblue;
+	background-color: lightgrey;
 }
 
 .grid-shift:hover {
 	background-color: lightgreen;
 }
 
-.grid-shift.active {
-	background-color: indianred;
+.grid-shift.early.active {
+	background-color: #1B5CFF;
+}
+
+.grid-shift.late.active {
+	background-color: #D23E3E;
 }

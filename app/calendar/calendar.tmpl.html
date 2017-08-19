@@ -28,7 +28,7 @@
 				</span>
 				<div flex>
 					<md-grid-list md-cols="4" md-row-height="3:2" flex>
-						<md-grid-tile ng-repeat="(shift, times) in vm.shifts" ng-click="vm.setShift(day, shift)" ng-class="{ 'active': day.shift === shift }" md-ink-ripple class="md-clickable grid-shift">
+						<md-grid-tile ng-repeat="(shift, times) in vm.shifts" ng-click="vm.setShift(day, shift)" ng-class="[{ 'active': day.shift === shift}, times.class]" md-ink-ripple class="md-clickable grid-shift">
 							{{ ::shift }}
 							<md-tooltip>
 								{{ ::times | duration }}

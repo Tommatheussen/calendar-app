@@ -123,7 +123,7 @@
 
         function saveShifts() {
             var allRequests = [];
-          
+
             vm.days.forEach(function (element) {
                 var possibleRequest = createRequest(element);
 
