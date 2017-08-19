@@ -51,7 +51,7 @@
     },
     "l'": {
         "start": {
-            "hour": "14",
+            "hour": "15",
             "minute": "00"
         },
         "end": {
@@ -69,19 +69,6 @@
             "minute": "30"
         }
     },
-    "hmlw": {
-        "start": {
-            "hour": "14",
-            "minute": "30"
-        },
-        "end": {
-            "hour": "21",
-            "minute": "00"
-        },
-        "weekend": {
-            "end": "+1"
-        }
-    },
     "vw": {
         "start": {
             "hour": "07",
@@ -92,15 +79,5 @@
             "minute": "00"
         },
         "weekend": true
-    },
-    "ld": {
-        "start": {
-            "hour": "16",
-            "minute": "45"
-        },
-        "end": {
-            "hour": "21",
-            "minute": "00"
-        }
     }
 }
