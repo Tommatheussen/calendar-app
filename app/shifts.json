@@ -1,91 +1,113 @@
 {
-    "v'": {
-        "start": {
-            "hour": "06",
-            "minute": "45"
-        },
-        "end": {
-            "hour": "13",
-            "minute": "00"
-        },
-        "class": "early"
+  "gv": {
+    "start": {
+      "hour": "06",
+      "minute": "30"
     },
-    "kv": {
-        "start": {
-            "hour": "06",
-            "minute": "45"
-        },
-        "end": {
-            "hour": "10",
-            "minute": "45"
-        },
-        "class": "early"
+    "end": {
+      "hour": "14",
+      "minute": "30"
     },
-    "kvb": {
-        "start": {
-            "hour": "06",
-            "minute": "45"
-        },
-        "end": {
-            "hour": "07",
-            "minute": "45"
-        },
-        "class": "early"
+    "class": "early"
+  },
+  "v'": {
+    "start": {
+      "hour": "06",
+      "minute": "45"
     },
-    "gv": {
-        "start": {
-            "hour": "06",
-            "minute": "30"
-        },
-        "end": {
-            "hour": "14",
-            "minute": "30"
-        },
-        "class": "early"
+    "end": {
+      "hour": "13",
+      "minute": "00"
     },
-    "klv": {
-        "start": {
-            "hour": "16",
-            "minute": "30"
-        },
-        "end": {
-            "hour": "21",
-            "minute": "30"
-        },
-        "class": "late"
+    "class": "early"
+  },
+  "kv": {
+    "start": {
+      "hour": "06",
+      "minute": "45"
     },
-    "l'": {
-        "start": {
-            "hour": "15",
-            "minute": "00"
-        },
-        "end": {
-            "hour": "21",
-            "minute": "00"
-        },
-        "class": "late"
+    "end": {
+      "hour": "11",
+      "minute": "00"
     },
-    "gl": {
-        "start": {
-            "hour": "13",
-            "minute": "00"
-        },
-        "end": {
-            "hour": "21",
-            "minute": "30"
-        },
-        "class": "late"
+    "class": "early"
+  },
+  "gl": {
+    "start": {
+      "hour": "13",
+      "minute": "00"
     },
-    "vw": {
-        "start": {
-            "hour": "07",
-            "minute": "00"
-        },
-        "end": {
-            "hour": "14",
-            "minute": "00"
-        },
-        "weekend": true,
-        "class": "early"
-    }
+    "end": {
+      "hour": "21",
+      "minute": "30"
+    },
+    "class": "late"
+  },
+  "l'v": {
+    "start": {
+      "hour": "15",
+      "minute": "00"
+    },
+    "end": {
+      "hour": "21",
+      "minute": "00"
+    },
+    "class": "late"
+  },
+  "klv": {
+    "start": {
+      "hour": "16",
+      "minute": "30"
+    },
+    "end": {
+      "hour": "21",
+      "minute": "30"
+    },
+    "class": "late"
+  },
+  "v": {
+    "start": {
+      "hour": "06",
+      "minute": "45"
+    },
+    "end": {
+      "hour": "14",
+      "minute": "00"
+    },
+    "weekend": true,
+    "class": "early"
+  },
+  "kvb": {
+    "start": {
+      "hour": "06",
+      "minute": "45"
+    },
+    "end": {
+      "hour": "11",
+      "minute": "00"
+    },
+    "class": "early"
+  },
+  "l'": {
+    "start": {
+      "hour": "14",
+      "minute": "00"
+    },
+    "end": {
+      "hour": "21",
+      "minute": "00"
+    },
+    "class": "late"
+  },
+  "MoL": {
+    "start": {
+      "hour": "16",
+      "minute": "45"
+    },
+    "end": {
+      "hour": "21",
+      "minute": "00"
+    },
+    "class": "late"
+  }
 }
